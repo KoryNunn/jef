@@ -12,23 +12,33 @@ function Control(model){
 
     this.model = model;
 
-    var insertedHandler = function(event){
-        if(doc(control.element).closest(event.target)){
-            doc(document).off('DOMNodeInserted', insertedHandler);
-            inserted = true;
-            if(ready && !insertCalled){
-                insertCalled = true;
-                control._inserted && control._inserted();
-            }
-        }
-    };
+    this._render();
 
-    doc(document).on('DOMNodeInserted', insertedHandler);
+    this.element._control = this;
+
+    var callInserted = function(){
+            if(control._inserted){
+                doc(document).off('DOMNodeInserted', insertedHandler);
+            }
+            insertCalled = true;
+            control._inserted && control._inserted();
+        },
+        insertedHandler = function(event){
+            if(doc(control.element).closest(event.target)){
+                inserted = true;
+                if(ready && !insertCalled){
+                    callInserted();
+                }
+            }
+        };
+
+    if(control._inserted){
+        doc(document).on('DOMNodeInserted', insertedHandler);
+    }
     doc.ready(setTimeout.bind(null, function(){
         ready = true;
         if(inserted && !insertCalled){
-            insertCalled = true;
-            control._inserted && control._inserted();
+            callInserted();
         }
         control._bind();
     },1));
@@ -56,6 +66,9 @@ Control.prototype.destroy = function(){
 
         boundEvent.emitter.removeListener(boundEvent.event, boundEvent.handler);
     }
+
+    this.removeAllListeners();
+    delete this.element;
 };
 
 module.exports = Control;

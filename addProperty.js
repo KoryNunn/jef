@@ -65,7 +65,7 @@ function addProperty(instance, name, eventName){
 
         changeHandler = callback;
 
-        model.on(path, callback);
+        scope.on(path, callback);
 
         callback(property());
     };
@@ -77,6 +77,12 @@ function addProperty(instance, name, eventName){
     property.path = function(){
         return path;
     };
+
+    instance.on('destroy', function(){
+        if(changeHandler){
+            scope.off(path, changeHandler);
+        }
+    });
 
     instance[name] = property;
 };
