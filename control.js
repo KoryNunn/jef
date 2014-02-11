@@ -41,6 +41,7 @@ function Control(model){
             callInserted();
         }
         control._bind();
+        control.emit('ready');
     },1));
 }
 Control.prototype = Object.create(EventEmitter.prototype);
