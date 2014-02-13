@@ -1,11 +1,23 @@
 {
   "name": "jef",
   "version": "0.0.1",
-  "description": "",
+  "description": "Just enough framework",
   "main": "jef.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Todo... these.\" && exit 1"
   },
   "author": "",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "ooze": "0.0.16",
+    "doc-js": "~0.4.3",
+    "deep-equal": "~0.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/KoryNunn/jef.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KoryNunn/jef/issues"
+  }
 }

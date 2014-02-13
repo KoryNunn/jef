@@ -7,10 +7,14 @@ function Control(model){
         inserted,
         insertCalled;
 
-    this._boundEvents = [];
-    this.setMaxListeners(100);
+    if(!model){
+        throw 'A Model must be passed to a control on initialisation';
+    }
 
     this.model = model;
+
+    this._boundEvents = [];
+    this.setMaxListeners(100);
 
     this._render();
 
