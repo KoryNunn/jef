@@ -9,9 +9,9 @@
   "author": "",
   "license": "BSD",
   "dependencies": {
-    "ooze": "0.0.16",
-    "doc-js": "~0.4.3",
-    "deep-equal": "~0.2.1"
+    "ooze": "0.0.x",
+    "doc-js": "~0.4.x",
+    "deep-equal": "~0.2.x"
   },
   "repository": {
     "type": "git",
