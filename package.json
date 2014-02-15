@@ -1,6 +1,6 @@
 {
   "name": "jef",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Just enough framework",
   "main": "jef.js",
   "scripts": {
