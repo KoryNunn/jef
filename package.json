@@ -10,8 +10,8 @@
   "license": "BSD",
   "dependencies": {
     "ooze": "0.0.x",
-    "doc-js": "~0.4.x",
-    "deep-equal": "~0.2.x"
+    "doc-js": "0.4.x",
+    "deep-equal": "0.2.x"
   },
   "repository": {
     "type": "git",
