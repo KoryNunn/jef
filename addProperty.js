@@ -1,23 +1,12 @@
-var deepEqual = require('deep-equal');
-
-function sameAs(a,b){
-    if(typeof a !== typeof b){
-        return false;
-    }
-    if(a instanceof Date){
-        return a.getTime() === b.getTime();
-    }
-    if(isNaN(a) && isNaN(b)){
-        return true;
-    }
-    return deepEqual(a,b);
-}
+var deepEqual = require('deep-equal'),
+    clone = require('clone');
 
 function addProperty(instance, name, eventName){
     var scope = instance.model,
         path = name,
         transform,
         changeHandler,
+        lastValue,
         property = function(value){
             if(!scope) {
                 return;
@@ -28,7 +17,10 @@ function addProperty(instance, name, eventName){
                 return transform ? transform(currentValue) : currentValue;
             }
 
-            if(!sameAs(value, currentValue)){
+            var newValueJson = JSON.stringify(value);
+
+            if(!deepEqual(value, lastValue)){
+                lastValue = clone(value);
                 scope.set(path, value);
                 this.emit(eventName || name);
             }
