@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="build/jef.js"></script>
+    <script type="text/javascript">
+    window.onload = function(){
+        function Textbox(model){
+            // Run the Control constructor against this.
+            jef.Control.apply(this, arguments);
+
+            // Add a value property that can be bound to.
+            jef.addProperty(this, 'value');
+        }
+        Textbox.prototype = Object.create(jef.Control.prototype);
+        Textbox.prototype.constructor = Textbox;
+
+        // Add a render method, otherwise your control wouldn't have any UI bits.
+        Textbox.prototype._render = function(){
+
+            // Assign something to this.element.
+            this.element = document.createElement('input');
+        };
+
+        // Add a bind method, this allows you to bind up all of the controls events in one location.
+        Textbox.prototype._bind = function(){
+            var control = this;
+
+            // bind the controls value property to its input elements value.
+            this.value.onChange(function(value){
+                // Only set the value if the value passed in is truthy,
+                // An easy safeguard against setting the inputs value to 'undefined'
+                control.element.value = value ? value : '';
+            });
+        };
+
+
+        var model = new Ooze({value: 'hello world'});
+
+        var textbox = new Textbox(model);
+
+        document.body.appendChild(textbox.element);
+
+
+    }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

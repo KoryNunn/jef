@@ -19,7 +19,7 @@ function addProperty(instance, name, eventName){
 
             var newValueJson = JSON.stringify(value);
 
-            if(!deepEqual(value, lastValue)){
+            if(!property.equal(value, lastValue)){
                 lastValue = clone(value);
                 scope.set(path, value);
                 this.emit(eventName || name);
@@ -68,6 +68,10 @@ function addProperty(instance, name, eventName){
 
     property.path = function(){
         return path;
+    };
+
+    property.equal = function(a,b){
+        return deepEqual(a,b);
     };
 
     instance.on('destroy', function(){

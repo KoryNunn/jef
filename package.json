@@ -4,7 +4,8 @@
   "description": "Just enough framework",
   "main": "jef.js",
   "scripts": {
-    "test": "echo \"Todo... these.\" && exit 1"
+    "test": "echo \"Todo... these.\" && exit 1",
+    "build": "browserify ./jef.js > ./build/jef.js"
   },
   "author": "",
   "license": "BSD",
